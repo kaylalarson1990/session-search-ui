@@ -16,7 +16,6 @@
   grid-column: 2 / span 2;
 }
 
-
 .search-input {
   background-color: #fff;
   border: 0.5px #c7d0da solid;
@@ -28,7 +27,12 @@
   padding: 16px;
 }
 
+.search-select {
+  cursor: pointer;
+}
+
 select, input {
+  background: transparent;
   border: 1px solid #a7b6c5;
   border-radius: 5px;
   color: #525c66;
@@ -38,9 +42,14 @@ select, input {
   height: 34px;
   letter-spacing: 0.5px;
   width: 100%;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
 }
 
-
+.search-select {
+  background: url("assets/downarrow.svg") no-repeat right;
+}
 
 input {
   padding: 0px 8px;
@@ -59,6 +68,7 @@ img {
 }
 
 .exit {
+  cursor: pointer;
   margin-right: 10px;
 }
 
