@@ -2,7 +2,7 @@ import React from 'react';
 import './searchfields.css';
 import search from './assets/search.svg';
 import exit from './assets/exit.svg';
-import {firstField, secondField} from './constants';
+import {firstField, secondField} from '../helpers/constants';
 import $ from "jquery";
 
 export default class SearchFields extends React.Component {
