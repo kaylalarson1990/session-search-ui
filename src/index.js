@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './searchfields.css';
-import SearchFields from './SearchFields';
+import SearchFields from './Components/SearchFields';
 
 ReactDOM.render(
   <React.StrictMode>
