@@ -113,3 +113,12 @@ img {
   padding: 50px;
   text-align: center;
 }
+
+.screen-size-select {
+  background: #e0e6ec;
+  border: 0.5px #c0cad6 solid;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 20px;
+  padding: 6px 10px;
+}

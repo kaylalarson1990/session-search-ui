@@ -15,19 +15,14 @@ function SearchFields() {
 
   const removeField = (index) => {
     let copy = [...field]
-    copy.splice(index, 1);
-    setField(copy);
+    if (field.length > 1) {
+      copy.splice(index, 1);
+      setField(copy);
+    }
   }
 
   const restart = (e) => {
     setField([0])
-  }
-
-  const likeQuery = () => {
-    // const startsWith = secondField.map(
-    //   field => {
-    //     return field.title === "starts with" ? $(`<p>SELECT * FROM session WHERE * LIKE ${field.title}</p>`).appendTo('.sql-statement') : ""
-    //   })
   }
 
     return (
@@ -38,7 +33,7 @@ function SearchFields() {
           <button className="active-btn and" id="and-btn" onClick={(e) => addField(e)}>And</button>
           <div className="hr"></div>
           <div>
-            <button className="active-btn" onClick={likeQuery}><img src={search} />Search</button>
+            <button className="active-btn"><img src={search} />Search</button>
             <button className="reset-btn" onClick={restart}>Reset</button>
           </div>
           <div className="sql-statement">Your Generated SQL Statement goes here:</div>
