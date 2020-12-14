@@ -48,7 +48,7 @@ select, input {
 }
 
 .search-select {
-  background: url("assets/downarrow.svg") no-repeat right;
+  background: url("../assets/downarrow.svg") no-repeat right;
 }
 
 input {

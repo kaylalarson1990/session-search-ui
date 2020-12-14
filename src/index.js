@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './searchfields.css';
+import './styles/index.css';
 import SearchFields from './Components/SearchFields';
 
 ReactDOM.render(

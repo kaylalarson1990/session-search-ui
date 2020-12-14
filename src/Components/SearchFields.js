@@ -1,7 +1,7 @@
 import React from 'react';
-import './searchfields.css';
-import search from './assets/search.svg';
-import exit from './assets/exit.svg';
+import '../styles/searchfields.css';
+import search from '../assets/search.svg';
+import exit from '../assets/exit.svg';
 import {firstField, secondField} from '../helpers/constants';
 import $ from "jquery";
 
