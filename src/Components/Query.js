@@ -1,17 +1,24 @@
 import React from 'react';
+import '../styles/searchfields.css';
+import {querySwitch} from '../helpers/constants';
 
-export class Query extends React.Component{
+export default class Query extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: ""
+    }
+  }
 
-  likeQuery = () => {
-    // const startsWith = secondField.map(
-    //   field => {
-    //     return field.title === "starts with" ? $(`<p>SELECT * FROM session WHERE * LIKE ${field.title}</p>`).appendTo('.sql-statement') : ""
-    //   })
+  handleChange = (e) => {
+    this.setState({ query: e.target.value });
   }
 
   render() {
+    const { query } = this.state;
+
     return(
-      <div>hello</div>
+      querySwitch(query)
     )
   }
 }

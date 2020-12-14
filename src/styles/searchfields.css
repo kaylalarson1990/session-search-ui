@@ -3,7 +3,7 @@
 .search-container {
   display: grid;
   font-family: 'Open Sans', sans-serif;
-  grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
   margin-top: 50px;
 }
 
@@ -19,12 +19,12 @@
 .search-input {
   background-color: #fff;
   border: 0.5px #c7d0da solid;
-  border-radius: 5px;
+  border-radius: 4px;
   display: flex;
   justify-content: space-around;
   margin-bottom: 15px;
   min-width: 100%;
-  padding: 16px;
+  padding: 16px 8px;
 }
 
 .search-select {
@@ -34,10 +34,10 @@
 select, input {
   background: transparent;
   border: 1px solid #a7b6c5;
-  border-radius: 5px;
+  border-radius: 4px;
   color: #525c66;
   margin: 0 8px;
-  padding: 0 30px 0 4px;
+  padding: 0 30px 0 8px;
   font-size: 0.9em;
   height: 34px;
   letter-spacing: 0.5px;
@@ -49,6 +49,10 @@ select, input {
 
 .search-select {
   background: url("../assets/downarrow.svg") no-repeat right;
+}
+
+.between {
+  background: url("../assets/uparrow.svg") no-repeat right;
 }
 
 input {
@@ -79,7 +83,7 @@ img {
 .active-btn, .reset-btn {
   background-color: #07aeeb;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   color: white;
   cursor: pointer;
   font-size: 0.9em;
