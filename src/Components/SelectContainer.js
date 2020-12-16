@@ -8,36 +8,37 @@ export default class SelectContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      field: ""
     }
   }
 
   handleChange = (e) => {
-    this.setState({ field: e.target.value });
+    const value = e.target.value
+    this.setState({ [e.target.name]: value });
   }
 
   render() {
     const { removeItem, index } = this.props;
-    const { field } = this.state;
+    const { firstSearchField, secondSearchField } = this.state;
+    console.log('this.state', this.state)
 
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={() => removeItem(index)} />
-        <select name="search-field" value={this.state.field} onChange={this.handleChange} className="search-select">
+        <select name="firstSearchField" value={firstSearchField} onChange={this.handleChange} className="search-select">
           { firstField.map(field => {
             return <option key={field} value={field}>{field}</option>
           })}
         </select>
-        {field === "Screen Width" || field === "Screen Height" ? (
+        {firstSearchField === "Screen Width" || firstSearchField === "Screen Height" ? (
           <ScreenSize />
         ) : (
           <>
-            <select name="search-field" className="search-select">
+            <select name="secondSearchField" value={secondSearchField} onChange={this.handleChange} className="search-select">
               { secondField.map(field => {
                 return <option key={field} value={field}>{field}</option>
               })}
             </select>
-            <input placeholder={renderSwitch(field)}></input>
+            <input placeholder={renderSwitch(firstSearchField)}></input>
           </>
         )}
       </div>
