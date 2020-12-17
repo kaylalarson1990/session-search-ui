@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import '../styles/searchfields.css';
 import search from '../assets/search.svg';
 import SelectContainer from './SelectContainer';
+import {querySwitch} from '../helpers/constants';
 
-function SearchFields() {
+function SearchFields({props}) {
   const [field, setField] = useState([0]);
   let fieldId = 0;
   useEffect(() => {});
@@ -25,6 +26,12 @@ function SearchFields() {
     setField([0])
   }
 
+  const querySearch = (param) => {
+    console.log(param)
+    alert(querySwitch(param));
+  }
+  console.log('props', props)
+
     return (
       <div className="search-container">
         <div className="search-field">
@@ -33,10 +40,10 @@ function SearchFields() {
           <button className="active-btn and" id="and-btn" onClick={(e) => addField(e)}>And</button>
           <div className="hr"></div>
           <div>
-            <button className="active-btn"><img src={search} />Search</button>
+            <button className="active-btn" onClick={(param) => querySearch(param)}><img src={search} />Search</button>
             <button className="reset-btn" onClick={restart}>Reset</button>
           </div>
-          <div className="sql-statement">Your Generated SQL Statement goes here:</div>
+          <div className="sql-statement">Your Generated SQL Statement goes here: {querySwitch}</div>
         </div>
       </div>
     )

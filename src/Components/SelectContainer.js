@@ -8,7 +8,9 @@ export default class SelectContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      input: '',
+      firstValue: '',
+      secondValue: ''
     }
   }
 
@@ -30,7 +32,7 @@ export default class SelectContainer extends React.Component {
           })}
         </select>
         {firstSearchField === "Screen Width" || firstSearchField === "Screen Height" ? (
-          <ScreenSize />
+          <ScreenSize handleChange={this.handleChange} />
         ) : (
           <>
             <select name="secondSearchField" value={secondSearchField} onChange={this.handleChange} className="search-select">
