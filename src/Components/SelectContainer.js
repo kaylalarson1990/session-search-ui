@@ -8,6 +8,7 @@ export default class SelectContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      input: ''
     }
   }
 
@@ -18,8 +19,7 @@ export default class SelectContainer extends React.Component {
 
   render() {
     const { removeItem, index } = this.props;
-    const { firstSearchField, secondSearchField } = this.state;
-    console.log('this.state', this.state)
+    const { firstSearchField, secondSearchField, input } = this.state;
 
     return (
       <div className="search-input" id="search-select-container">
@@ -38,7 +38,7 @@ export default class SelectContainer extends React.Component {
                 return <option key={field} value={field}>{field}</option>
               })}
             </select>
-            <input placeholder={renderSwitch(firstSearchField)}></input>
+            <input placeholder={renderSwitch(firstSearchField)} name="input" value={input} onChange={this.handleChange}></input>
           </>
         )}
       </div>
