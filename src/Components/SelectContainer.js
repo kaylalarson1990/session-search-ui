@@ -2,27 +2,19 @@ import React from 'react';
 import ScreenSize from './ScreenSize';
 import exit from '../assets/exit.svg';
 import '../styles/searchfields.css';
+import {connect} from 'react-redux';
 import {firstField, secondField, renderSwitch} from '../helpers/constants';
+import {setValues} from '../actions';
 
-export default class SelectContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '',
-      firstValue: '',
-      secondValue: ''
-    }
-  }
-
+class SelectContainer extends React.Component {
   handleChange = (e) => {
-    const value = e.target.value
-    this.setState({ [e.target.name]: value });
+    const { setValues, values } = this.props;
+    setValues([...values, {[e.target.name]: e.target.value}])
   }
 
   render() {
-    const { removeItem, index } = this.props;
-    const { firstSearchField, secondSearchField, input } = this.state;
-
+    const { removeItem, index, firstSearchField, secondSearchField, input } = this.props;
+console.log('firstSearchField === "Screen Width" || firstSearchField === "Screen Height" ', this.props)
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={() => removeItem(index)} />
@@ -47,3 +39,13 @@ export default class SelectContainer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  values: state.values
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setValues: (value) => dispatch(setValues(value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectContainer);

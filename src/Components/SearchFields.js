@@ -1,52 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import '../styles/searchfields.css';
 import search from '../assets/search.svg';
 import SelectContainer from './SelectContainer';
 import {querySwitch} from '../helpers/constants';
+import { connect } from 'react-redux';
 
-function SearchFields({props}) {
-  const [field, setField] = useState([0]);
-  let fieldId = 0;
-  useEffect(() => {});
+class SearchFields extends React.Component {
 
-  const addField = (e) => {
-    fieldId++
-    setField([...field, field.length]);
-  }
-
-  const removeField = (index) => {
-    let copy = [...field]
-    if (field.length > 1) {
-      copy.splice(index, 1);
-      setField(copy);
-    }
-  }
-
-  const restart = (e) => {
-    setField([0])
-  }
-
-  const querySearch = (param) => {
-    console.log(param)
-    alert(querySwitch(param));
-  }
-  console.log('props', props)
+render() {
+  const { field, removeItem, restart, addItem } = this.props;
+  console.log('insearchfield', this.props)
 
     return (
       <div className="search-container">
         <div className="search-field">
           <h1 className="search-header">Search for Sessions</h1>
-          {field.map((id, i) => <SelectContainer key={id} id={id} index={i} removeItem={removeField} />)}
-          <button className="active-btn and" id="and-btn" onClick={(e) => addField(e)}>And</button>
+          {field.map((id, i) => <SelectContainer key={id} id={id} index={i} removeItem={removeItem} />)}
+          <button className="active-btn and" id="and-btn" onClick={(e) => addItem(e)}>And</button>
           <div className="hr"></div>
           <div>
-            <button className="active-btn" onClick={(param) => querySearch(param)}><img src={search} />Search</button>
+            <button className="active-btn"><img src={search} />Search</button>
             <button className="reset-btn" onClick={restart}>Reset</button>
           </div>
-          <div className="sql-statement">Your Generated SQL Statement goes here: {querySwitch}</div>
+          <div className="sql-statement">{querySwitch()}</div>
         </div>
       </div>
     )
+  }
 }
 
-export default SearchFields;
+const mapStateToProps = (state) => ({
+  values: state.values
+})
+
+export default connect(mapStateToProps)(SearchFields);
