@@ -3,7 +3,6 @@ import '../styles/searchfields.css';
 import search from '../assets/search.svg';
 import SelectContainer from './SelectContainer';
 import $ from 'jquery';
-// import {querySwitch} from '../helpers/constants';
 import { connect } from 'react-redux';
 
 class SearchFields extends React.Component {

@@ -35,20 +35,3 @@ export const renderSwitch = (param) => {
       return "website.com";
   }
 }
-
-export const querySwitch = (param) => {
-  switch(param)  {
-    case "equals":
-      return "SELECT __ FROM session WHERE __;";
-    case "contains":
-      return "SELECT __ FROM session WHERE CONTAINS(__, 'string');";
-    case "starts with":
-      return "SELECT __ FROM session WHERE __ LIKE __;";
-    case "in list":
-      return "SELECT __ FROM session WHERE __ IN __;";
-    case "between":
-      return "SELECT __ FROM session WHERE __ BETWEEN __ AND __;";
-    default:
-      return "Your Generated SQL Statement goes here:"
-  }
-}
