@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import SearchFields from './SearchFields';
-import $ from 'jquery';
 
 function App() {
   const [field, setField] = useState([0]);
@@ -21,8 +20,7 @@ function App() {
   }
 
   const restart = (e) => {
-    setField([0])
-    $("p").remove();
+    window.location.reload()
   }
 
     return (

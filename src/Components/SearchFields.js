@@ -9,8 +9,8 @@ class SearchFields extends React.Component {
 
 querySwitch = (param) => {
   const firstValues = this.props.values.map(val => val.firstSearchField).join();
-  // const secondValues = this.props.values.map(val => val.secondSearchField).join(', ');
-  const thirdValues = this.props.values.map(val => val.input);
+  const thirdValues = this.props.values.map(val => val.input).join();
+
   switch(param)  {
     case "equals":
       return $(`<p>SELECT ${firstValues} FROM session WHERE ${thirdValues};</p>`).appendTo(".sql-statement");
@@ -29,11 +29,8 @@ querySwitch = (param) => {
 
 render() {
   const { field, removeItem, restart, addItem, values } = this.props;
-  const firstValues = values.map(val => val.firstSearchField).join('');
   const secondValues = values.map(val => val.secondSearchField).join('');
-  console.log(firstValues)
   console.log(secondValues)
-
 
     return (
       <div className="search-container">

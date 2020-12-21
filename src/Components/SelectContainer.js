@@ -13,7 +13,11 @@ class SelectContainer extends React.Component {
   }
 
   render() {
-    const { removeItem, index, input, firstSearchField, secondSearchField } = this.props;
+    const { removeItem, index, input, firstSearchField, secondSearchField, values } = this.props;
+    const firstValue = values.reduce((_val, item) => {
+      return item.firstSearchField
+    }, "");
+
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={() => removeItem(index)} />
@@ -22,7 +26,7 @@ class SelectContainer extends React.Component {
             return <option key={field} value={field}>{field}</option>
           })}
         </select>
-        {firstSearchField === ["Screen Width"] || firstSearchField === ["Screen Height"] ? (
+        {firstValue === "Screen Width" || firstValue === "Screen Height" ? (
           <ScreenSize handleChange={this.handleChange} />
         ) : (
           <>
