@@ -1,4 +1,5 @@
 export const firstField = [
+  "Choose one..",
   "Domain",
   "Page Response Time",
   "Page Path",
@@ -11,6 +12,7 @@ export const firstField = [
 ]
 
 export const secondField = [
+  "Choose one..",
   "equals",
   "contains",
   "starts with",

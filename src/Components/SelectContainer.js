@@ -3,7 +3,6 @@ import ScreenSize from './ScreenSize';
 import exit from '../assets/exit.svg';
 import '../styles/searchfields.css';
 import {connect} from 'react-redux';
-import $ from 'jquery';
 import {firstField, secondField, renderSwitch} from '../helpers/constants';
 import {setValues} from '../actions';
 
