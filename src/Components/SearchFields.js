@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 class SearchFields extends React.Component {
 
 querySwitch = (param) => {
-  const firstValues = this.props.values.map(val => val.firstSearchField).join();
-  const thirdValues = this.props.values.map(val => val.input).join();
+  const firstValues = this.props.values.map(val => val.firstSearchField).join('');
+  const thirdValues = this.props.values.map(val => val.input).join('');
 
   switch(param)  {
     case "equals":

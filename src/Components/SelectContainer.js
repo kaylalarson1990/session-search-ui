@@ -7,9 +7,17 @@ import {firstField, secondField, renderSwitch} from '../helpers/constants';
 import {setValues} from '../actions';
 
 class SelectContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.timeout = 0;
+  }
+
   handleChange = (e) => {
     const { setValues, values } = this.props;
-    setValues([...values, {[e.target.name]: e.target.value}])
+    if (this.timeout) clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      setValues([...values, {[e.target.name]: e.target.value}])
+    }, 500);
   }
 
   render() {
