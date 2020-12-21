@@ -13,7 +13,7 @@ class SelectContainer extends React.Component {
   }
 
   handleChange = (e) => {
-    const { setValues, values } = this.props;
+    const {setValues, values} = this.props;
     if (this.timeout) clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       setValues([...values, {[e.target.name]: e.target.value}])
@@ -21,25 +21,35 @@ class SelectContainer extends React.Component {
   }
 
   render() {
-    const { removeItem, index, input, firstSearchField, secondSearchField, values } = this.props;
-    const firstValue = values.reduce((_val, item) => {
-      return item.firstSearchField
-    }, "");
+    const {
+      removeItem,
+      index,
+      input,
+      firstSearchField,
+      secondSearchField,
+      values
+    } = this.props;
+    const firstValue = values.map(val => val.firstSearchField);
+    const filterValue = firstValue.filter(n => {
+      if (n === "Screen Width" || n === "Screen Height") {
+        return n;
+      }
+    });
 
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={() => removeItem(index)} />
         <select name="firstSearchField" value={firstSearchField} onChange={this.handleChange} className="search-select">
-          { firstField.map(field => {
+          {firstField.map(field => {
             return <option key={field} value={field}>{field}</option>
           })}
         </select>
-        {firstValue === "Screen Width" || firstValue === "Screen Height" ? (
+        {filterValue.join() === "Screen Width" || filterValue.join() === "Screen Height" ? (
           <ScreenSize handleChange={this.handleChange} />
         ) : (
           <>
             <select name="secondSearchField" value={secondSearchField} onChange={this.handleChange} className="search-select">
-              { secondField.map(field => {
+              {secondField.map(field => {
                 return <option key={field} value={field}>{field}</option>
               })}
             </select>
@@ -56,7 +66,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setValues: (val1, val2, val3) => dispatch(setValues(val1, val2, val3))
+  setValues: (val) => dispatch(setValues(val))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectContainer);

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ScreenSize(props) {
-  const { handleChange } = props;
+  const {handleChange} = props;
 
   return (
     <>
