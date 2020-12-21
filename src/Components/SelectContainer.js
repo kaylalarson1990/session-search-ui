@@ -3,6 +3,7 @@ import ScreenSize from './ScreenSize';
 import exit from '../assets/exit.svg';
 import '../styles/searchfields.css';
 import {connect} from 'react-redux';
+import $ from 'jquery';
 import {firstField, secondField, renderSwitch} from '../helpers/constants';
 import {setValues} from '../actions';
 
@@ -13,8 +14,7 @@ class SelectContainer extends React.Component {
   }
 
   render() {
-    const { removeItem, index, firstSearchField, secondSearchField, input } = this.props;
-console.log('firstSearchField === "Screen Width" || firstSearchField === "Screen Height" ', this.props)
+    const { removeItem, index, input, firstSearchField, secondSearchField } = this.props;
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={() => removeItem(index)} />
@@ -23,7 +23,7 @@ console.log('firstSearchField === "Screen Width" || firstSearchField === "Screen
             return <option key={field} value={field}>{field}</option>
           })}
         </select>
-        {firstSearchField === "Screen Width" || firstSearchField === "Screen Height" ? (
+        {firstSearchField === ["Screen Width"] || firstSearchField === ["Screen Height"] ? (
           <ScreenSize handleChange={this.handleChange} />
         ) : (
           <>
@@ -32,7 +32,7 @@ console.log('firstSearchField === "Screen Width" || firstSearchField === "Screen
                 return <option key={field} value={field}>{field}</option>
               })}
             </select>
-            <input placeholder={renderSwitch(firstSearchField)} name="input" value={input} onChange={this.handleChange}></input>
+            <input className="handle-input" placeholder={renderSwitch(firstSearchField)} name="input" value={input} onChange={this.handleChange}></input>
           </>
         )}
       </div>
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setValues: (value) => dispatch(setValues(value))
+  setValues: (val1, val2, val3) => dispatch(setValues(val1, val2, val3))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectContainer);

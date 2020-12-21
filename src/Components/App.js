@@ -23,14 +23,13 @@ function App() {
     setField([0])
   }
 
-  // const querySearch = (param) => {
-  //   console.log(param)
-  //   alert(querySwitch(param));
-  // }
-  // console.log('state', props)
-
     return (
-      <SearchFields restart={restart} removeItem={removeField} addItem={addField} field={field} />
+      <SearchFields
+        restart={restart}
+        removeItem={removeField}
+        addItem={addField}
+        field={field}
+      />
     )
 }
 
