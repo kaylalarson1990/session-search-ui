@@ -22,13 +22,12 @@ querySwitch = (param) => {
     case "contains":
       return $(`<p>SELECT ${filterFirstValues} FROM session WHERE CONTAINS(${filterThirdValues}, 'string');</p>`).appendTo(".sql-statement");
     case "starts with":
-      return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} LIKE __;</p>`).appendTo(".sql-statement");
+      return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} LIKE %${filterThirdValues};</p>`).appendTo(".sql-statement");
     case "in list":
-      return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} IN __;</p>`).appendTo(".sql-statement");
+      return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} IN ${filterThirdValues};</p>`).appendTo(".sql-statement");
     case "between":
       return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} BETWEEN __ AND __;</p>`).appendTo(".sql-statement");
     case `${filterSecondValues}`:
-      console.log('here i am yep', `SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues};`)
       return $(`<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues};</p>`).appendTo(".sql-statement");
     default:
       return "Your Generated SQL Statement goes here:"

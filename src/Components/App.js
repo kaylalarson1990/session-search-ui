@@ -16,11 +16,13 @@ function App() {
     if (field.length > 1) {
       copy.splice(index, 1);
       setField(copy);
+    } else {
+      window.location.reload();
     }
   }
 
   const restart = (e) => {
-    window.location.reload()
+    window.location.reload();
   }
 
     return (
