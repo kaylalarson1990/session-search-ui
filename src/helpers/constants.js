@@ -1,4 +1,4 @@
-export const firstField = [
+export const selectType = [
   "Choose one..",
   "Domain",
   "Page Response Time",
@@ -11,7 +11,7 @@ export const firstField = [
   "# of Visits"
 ]
 
-export const secondField = [
+export const selectContainer = [
   "Choose one..",
   "equals",
   "contains",
