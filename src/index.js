@@ -1,12 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './styles/index.css';
-import SearchFields from './Components/SearchFields';
+import App from './Components/App';
+import {createStore} from 'redux';
+import {render} from '@testing-library/react';
+import {Provider} from 'react-redux';
+import rootReducer from './reducers';
 
+let store = createStore(rootReducer);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <SearchFields />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root')
+)
