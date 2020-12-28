@@ -3,11 +3,9 @@ import SearchFields from './SearchFields';
 
 function App() {
   const [field, setField] = useState([0]);
-  let fieldId = 0;
   useEffect(() => {});
 
   const addField = (e) => {
-    fieldId++
     setField([...field, field.length]);
   }
 
