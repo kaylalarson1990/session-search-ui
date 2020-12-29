@@ -1,5 +1,6 @@
 import React from 'react';
 import SelectFields from './SelectFields';
+import ScreenSize from './ScreenSize';
 import {setValues} from '../actions';
 import '../styles/searchfields.css';
 import search from '../assets/search.svg';
@@ -40,27 +41,20 @@ class SearchFields extends React.Component {
       this.setState({
         showData: showData
       })
+    } else {
+      window.location.reload();
     }
   }
 
   appendData = () => {
-    const {input, values} = this.props;
+    const {values} = this.props;
     console.log(values)
     this.displayData.push(
-      <div className="search-input" id="search-select-container">
-        <img src={exit} className="exit" onClick={(e) => this.removeData(e)} />
-        <select name="firstSearchField" onChange={this.handleChange} className="search-select">
-          {selectType.map(field => {
-            return <option key={field} value={field}>{field}</option>
-          })}
-        </select>
-        <select name="secondSearchField" onChange={this.handleChange} className="search-select">
-          {selectContainer.map(field => {
-            return <option key={field} value={field}>{field}</option>
-          })}
-        </select>
-        <input className="handle-input" name="input" value={input} onChange={this.handleChange} />
-      </div>
+      <SelectFields
+        handleChange={this.handleChange}
+        removeItem={this.removeData}
+        values={values}
+      />
     )
 
     this.setState({
@@ -112,6 +106,7 @@ class SearchFields extends React.Component {
           <SelectFields
             handleChange={this.handleChange}
             removeItem={this.removeData}
+            values={values}
           />
           <div>
             {this.displayData}
