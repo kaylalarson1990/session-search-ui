@@ -2,8 +2,9 @@ import React from 'react';
 import {selectType, selectContainer} from '../helpers/constants';
 import exit from '../assets/exit.svg';
 
-function SelectField(props) {
+function SelectFields(props) {
   const {handleChange, removeItem, index, input} = props;
+  console.log(props)
 
   return (
     <div className="search-input" id="search-select-container">
@@ -23,4 +24,4 @@ function SelectField(props) {
   )
 }
 
-export default SelectField;
+export default SelectFields;

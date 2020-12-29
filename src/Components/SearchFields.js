@@ -1,76 +1,126 @@
 import React from 'react';
+import SelectFields from './SelectFields';
+import {setValues} from '../actions';
 import '../styles/searchfields.css';
 import search from '../assets/search.svg';
-import SelectContainer from './SelectContainer';
+import exit from '../assets/exit.svg';
+import {selectType, selectContainer} from '../helpers/constants';
 import {connect} from 'react-redux';
 
 class SearchFields extends React.Component {
+  constructor(params) {
+    super(params);
+    this.displayData = [];
+    this.timeout = 0;
+    this.itemId = 0;
 
-querySwitch = (param) => {
-  const {values} = this.props;
-  const firstValues = values.map(val => val.firstSearchField);
-  const filterFirstValues = firstValues.filter(n => n).join(', ');
-  const secondValues = values.map(val => val.secondSearchField);
-  const filterSecondValues = secondValues.filter(n => n).join(', ')
-  const thirdValues = values.map(val => val.input);
-  const filterThirdValues = thirdValues.filter(n => n).join(', ');
-
-  let el = document.createElement('p')
-  let obj = document.getElementById('sql')
-
-  switch(param)  {
-    case "equals":
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues};</p>`;
-      return obj.appendChild(el);
-    case "contains":
-      console.log(param)
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE CONTAINS(${filterThirdValues}, 'string');</p>`;
-      return obj.appendChild(el);
-    case "starts with":
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} LIKE %${filterThirdValues};</p>`;
-      return obj.appendChild(el);
-    case "in list":
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} IN ${filterThirdValues};</p>`;
-      return obj.appendChild(el);
-    case "between":
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues} BETWEEN __ AND __;</p>`;
-      return obj.appendChild(el);
-    case `${filterSecondValues}`:
-      el.innerHTML = `<p>SELECT ${filterFirstValues} FROM session WHERE ${filterThirdValues};</p>`;
-      return obj.appendChild(el);
-    default:
-      return "Your Generated SQL Statement goes here:"
+    this.state = {
+      showData: this.displayData
+    }
   }
-}
 
-render() {
-  const {
-    field,
-    removeItem,
-    restart,
-    addItem,
-    values
-  } = this.props;
-  const secondValues = values.map(val => val.secondSearchField);
-  const filterSecondValues = secondValues.filter(n => n).join(', ');
+  handleChange = (e) => {
+    const {setValues, values} = this.props;
+    this.itemId++;
+    if (this.timeout) clearTimeout(this.timeout);
+    console.log('e', e.target.name, e.target.value)
+    this.timeout = setTimeout(() => {
+      setValues([...values, {[e.target.name]: e.target.value, id: this.itemId}])
+    }, 500);
+  }
+
+  restart = (e) => {
+    window.location.reload();
+  }
+
+  removeData = (index) => {
+    let {showData} = this.state;
+    if(showData.length >=1) {
+      showData.splice(index, 1);
+      this.setState({
+        showData: showData
+      })
+    }
+  }
+
+  appendData = () => {
+    const {input, values} = this.props;
+    console.log(values)
+    this.displayData.push(
+      <div className="search-input" id="search-select-container">
+        <img src={exit} className="exit" onClick={(e) => this.removeData(e)} />
+        <select name="firstSearchField" onChange={this.handleChange} className="search-select">
+          {selectType.map(field => {
+            return <option key={field} value={field}>{field}</option>
+          })}
+        </select>
+        <select name="secondSearchField" onChange={this.handleChange} className="search-select">
+          {selectContainer.map(field => {
+            return <option key={field} value={field}>{field}</option>
+          })}
+        </select>
+        <input className="handle-input" name="input" value={input} onChange={this.handleChange} />
+      </div>
+    )
+
+    this.setState({
+      showData: this.displayData
+    });
+  }
+
+  querySwitch = (param) => {
+    const {values} = this.props;
+    const firstValues = values.map(val => val.firstSearchField).filter(n => n).join(', ');
+    const secondValues = values.map(val => val.secondSearchField).filter(n => n).join(', ');
+    const thirdValues = values.map(val => val.input).filter(n => n).join(', ');
+    let el = document.createElement('p')
+    let obj = document.getElementById('sql')
+
+    switch(param)  {
+      case "equals":
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues};</p>`;
+        return obj.appendChild(el);
+      case "contains":
+        console.log(param)
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE CONTAINS(${thirdValues}, 'string');</p>`;
+        return obj.appendChild(el);
+      case "starts with":
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} LIKE %${thirdValues};</p>`;
+        return obj.appendChild(el);
+      case "in list":
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} IN ${thirdValues};</p>`;
+        return obj.appendChild(el);
+      case "between":
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} BETWEEN __ AND __;</p>`;
+        return obj.appendChild(el);
+      case `${secondValues}`:
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues};</p>`;
+        return obj.appendChild(el);
+      default:
+        return "Your Generated SQL Statement goes here:"
+    }
+  }
+
+  render() {
+    const {values} = this.props;
+    const secondValues = values.map(val => val.secondSearchField).filter(n => n).join(', ');
 
     return (
       <div className="search-container">
         <div className="search-field">
           <h1 className="search-header">Search for Sessions</h1>
-          {field.map((id, i) => {
-            return <SelectContainer
-              key={id}
-              id={id}
-              index={i}
-              removeItem={removeItem}
-            />
-          })}
-          <button className="active-btn and" id="and-btn" onClick={(e) => addItem(e)}>And</button>
+          <SelectFields
+            handleChange={this.handleChange}
+            removeItem={this.removeData}
+          />
+          <div>
+            {this.displayData}
+          </div>
+          <button className="active-btn and" id="and-btn" onClick={this.appendData}>And</button>
           <div className="hr"></div>
           <div>
-            <button className="active-btn" onClick={() => this.querySwitch(filterSecondValues)}><img src={search} />Search</button>
-            <button className="reset-btn" onClick={restart}>Reset</button>
+            <button className="active-btn" onClick={() => this.querySwitch(secondValues)}><img src={search} />Search</button>
+            <button className="reset-btn" onClick={this.restart}>Reset</button>
           </div>
           <div className="sql-statement" id="sql">Your Generated SQL Statement goes here:</div>
         </div>
@@ -83,4 +133,8 @@ const mapStateToProps = (state) => ({
   values: state.values
 })
 
-export default connect(mapStateToProps)(SearchFields);
+const mapDispatchToProps = (dispatch) => ({
+  setValues: (val) => dispatch(setValues(val))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchFields);

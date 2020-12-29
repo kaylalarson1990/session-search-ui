@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/index.css';
-import App from './Components/App';
+import SearchFields from './Components/SearchFields';
 import {createStore} from 'redux';
 import {render} from '@testing-library/react';
 import {Provider} from 'react-redux';
@@ -10,6 +10,6 @@ let store = createStore(rootReducer);
 
 render(
   <Provider store={store}>
-    <App />
+    <SearchFields />
   </Provider>, document.getElementById('root')
 )
