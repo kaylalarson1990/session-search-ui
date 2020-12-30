@@ -27,10 +27,6 @@
   padding: 16px 8px;
 }
 
-.search-select {
-  cursor: pointer;
-}
-
 select, input {
   background: transparent;
   border: 1px solid #a7b6c5;
@@ -55,6 +51,7 @@ select *.options {
 
 .search-select {
   background: url("../assets/downarrow.svg") no-repeat right;
+  cursor: pointer;
 }
 
 .between {

@@ -1,11 +1,8 @@
 import React from 'react';
 import SelectFields from './SelectFields';
-import ScreenSize from './ScreenSize';
 import {setValues} from '../actions';
 import '../styles/searchfields.css';
 import search from '../assets/search.svg';
-import exit from '../assets/exit.svg';
-import {selectType, selectContainer} from '../helpers/constants';
 import {connect} from 'react-redux';
 
 class SearchFields extends React.Component {
@@ -64,8 +61,8 @@ class SearchFields extends React.Component {
 
   querySwitch = (param) => {
     const {values} = this.props;
-    const firstValues = values.map(val => val.firstSearchField).filter(n => n).join(', ');
-    const secondValues = values.map(val => val.secondSearchField).filter(n => n).join(', ');
+    const firstValues = values.map(val => val.selectType).filter(n => n).join(', ');
+    const secondValues = values.map(val => val.selectContainer).filter(n => n).join(', ');
     const thirdValues = values.map(val => val.input).filter(n => n).join(', ');
     let el = document.createElement('p')
     let obj = document.getElementById('sql')
@@ -75,11 +72,10 @@ class SearchFields extends React.Component {
         el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues};</p>`;
         return obj.appendChild(el);
       case "contains":
-        console.log(param)
         el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE CONTAINS(${thirdValues}, 'string');</p>`;
         return obj.appendChild(el);
       case "starts with":
-        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} LIKE %${thirdValues};</p>`;
+        el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} LIKE ${thirdValues}%;</p>`;
         return obj.appendChild(el);
       case "in list":
         el.innerHTML = `<p>SELECT ${firstValues} FROM session WHERE ${thirdValues} IN ${thirdValues};</p>`;
@@ -97,7 +93,7 @@ class SearchFields extends React.Component {
 
   render() {
     const {values} = this.props;
-    const secondValues = values.map(val => val.secondSearchField).filter(n => n).join(', ');
+    const secondValues = values.map(val => val.selectContainer).filter(n => n).join(', ');
 
     return (
       <div className="search-container">

@@ -13,19 +13,17 @@ export default class SelectFields extends React.Component {
     }
 
     render() {
-    const {handleChange, removeItem, index, input, values} = this.props;
-    console.log(this.props)
-
+    const {handleChange, removeItem, input} = this.props;
 
     return (
       <div className="search-input" id="search-select-container">
         <img src={exit} className="exit" onClick={removeItem} />
-        <select name="firstSearchField" onChange={handleChange} className="search-select">
+        <select name="selectType" onChange={handleChange} className="search-select">
           {selectType.map(field => {
             return <option key={field} value={field}>{field}</option>
           })}
         </select>
-        <select name="secondSearchField" onChange={handleChange} className="search-select">
+        <select name="selectContainer" onChange={handleChange} className="search-select">
           {selectContainer.map(field => {
             return <option key={field} value={field}>{field}</option>
           })}
