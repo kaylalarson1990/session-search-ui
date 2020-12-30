@@ -4,11 +4,11 @@ import {selectType} from '../helpers/constants';
 
 
 function ScreenSize(props) {
-  const {handleChange, removeItem, index} = props;
+  const {handleChange, removeItem} = props;
 
   return (
     <div className="search-input" id="search-select-container">
-      <img src={exit} className="exit" onClick={() => removeItem(index)} />
+      <img src={exit} className="exit" onClick={removeItem} />
       <select name="firstSearchField" onChange={handleChange} className="search-select">
         {selectType.map(field => {
           return <option className="options" key={field} value={field}>{field}</option>
