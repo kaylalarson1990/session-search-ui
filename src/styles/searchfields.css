@@ -45,6 +45,12 @@ select, input {
   -webkit-appearance:none;
   -moz-appearance:none;
   appearance:none;
+  outline: none;
+}
+
+select *.options {
+  background-color: #fff !important;
+  color: #525c66;
 }
 
 .search-select {

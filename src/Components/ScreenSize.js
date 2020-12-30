@@ -11,12 +11,12 @@ function ScreenSize(props) {
       <img src={exit} className="exit" onClick={() => removeItem(index)} />
       <select name="firstSearchField" onChange={handleChange} className="search-select">
         {selectType.map(field => {
-          return <option key={field} value={field}>{field}</option>
+          return <option className="options" key={field} value={field}>{field}</option>
         })}
       </select>
       <div className="screen-size-select">is</div>
       <select name="search-field" className="search-select">
-        <option>between</option>
+        <option className="options">between</option>
       </select>
       <input placeholder="0" name="firstValue" onChange={handleChange}></input>
       <div className="screen-size-select">and</div>

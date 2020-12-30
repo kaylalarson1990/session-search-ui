@@ -18,3 +18,12 @@ export const selectContainer = [
   "starts with",
   "in list"
 ]
+
+export const selectIntContainer = [
+  "Choose one..",
+  "equals",
+  "between",
+  "greather than",
+  "less than",
+  "in list"
+]
