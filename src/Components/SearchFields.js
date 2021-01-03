@@ -21,7 +21,6 @@ class SearchFields extends React.Component {
     const {setValues, values} = this.props;
     this.itemId++;
     if (this.timeout) clearTimeout(this.timeout);
-    console.log('e', e.target.name, e.target.value)
     this.timeout = setTimeout(() => {
       setValues([...values, {[e.target.name]: e.target.value, id: this.itemId}])
     }, 500);
@@ -45,7 +44,6 @@ class SearchFields extends React.Component {
 
   appendData = () => {
     const {values} = this.props;
-    console.log(values)
     this.displayData.push(
       <SelectFields
         handleChange={this.handleChange}

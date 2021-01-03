@@ -3,15 +3,6 @@ import {selectType, selectContainer} from '../helpers/constants';
 import exit from '../assets/exit.svg';
 
 export default class SelectFields extends React.Component {
-    constructor(params) {
-      super(params);
-      this.displayData = [];
-      this.state = {
-        showData: this.displayData
-      }
-
-    }
-
     render() {
     const {handleChange, removeItem, input} = this.props;
 
